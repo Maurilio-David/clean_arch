@@ -17,28 +17,16 @@ class HabitRepositoryImpl implements HabitRepository {
   Future<List<Habit>> get() async {
     final models = await _datasource.getHabits();
 
-    return models
-        .map(
-          (model) => Habit(
-            id: model.id,
-            title: model.title,
-            createdAt: model.createdAt,
-          ),
-        )
-        .toList();
+    return models.map((model) => model.toEntity()).toList();
   }
 
   @override
   Future<void> insert(Habit habit) async {
-    await _datasource.insertHabit(
-      HabitModel(id: habit.id, title: habit.title, createdAt: habit.createdAt),
-    );
+    await _datasource.insertHabit(HabitModel.fromEntity(habit));
   }
 
   @override
   Future<void> update(Habit habit) async {
-    await _datasource.insertHabit(
-      HabitModel(id: habit.id, title: habit.title, createdAt: habit.createdAt),
-    );
+    await _datasource.insertHabit(HabitModel.fromEntity(habit));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:clean_arch/core/database/tables/habits_table.dart';
+import 'package:clean_arch/features/habits/domain/entities/habit.dart';
 
 class HabitModel {
   final String id;
@@ -25,5 +26,17 @@ class HabitModel {
       habistTableTitle: title,
       habistTableCreatedAt: createdAt.toIso8601String(),
     };
+  }
+
+  Habit toEntity() {
+    return Habit(id: id, title: title, createdAt: createdAt);
+  }
+
+  factory HabitModel.fromEntity(Habit habit) {
+    return HabitModel(
+      id: habit.id,
+      title: habit.title,
+      createdAt: habit.createdAt,
+    );
   }
 }
