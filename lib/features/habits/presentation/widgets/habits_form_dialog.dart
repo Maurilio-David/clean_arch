@@ -1,5 +1,5 @@
 import 'package:clean_arch/core/di/injector_container.dart';
-import 'package:clean_arch/features/habits/presentation/cubit/habit/habits_cubit.dart';
+import 'package:clean_arch/features/habits/presentation/cubit/habits_cubit.dart';
 import 'package:flutter/material.dart';
 
 class HabitsFormDialog extends StatefulWidget {

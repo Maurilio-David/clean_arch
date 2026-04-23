@@ -5,7 +5,8 @@ import 'package:clean_arch/features/habits/domain/usecases/delete_habit_usecase.
 import 'package:clean_arch/features/habits/domain/usecases/get_habits_usecase.dart';
 import 'package:clean_arch/features/habits/domain/usecases/insert_habit_usecase.dart';
 import 'package:clean_arch/features/habits/domain/usecases/update_habit_usecase.dart';
-import 'package:clean_arch/features/habits/presentation/cubit/habit/habits_cubit.dart';
+import 'package:clean_arch/features/habits/presentation/cubit/delete_habit_cubit.dart';
+import 'package:clean_arch/features/habits/presentation/cubit/habits_cubit.dart';
 import 'package:clean_arch/features/habits/repositories/habit_repository_impl.dart';
 
 import 'package:get_it/get_it.dart';

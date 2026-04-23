@@ -3,15 +3,20 @@ import 'package:clean_arch/features/habits/presentation/widgets/habit_card_widge
 import 'package:flutter/material.dart';
 
 class ListHabitsWidget extends StatelessWidget {
+  final void Function() onDeleteCubit;
   final List<Habit> habits;
-  const ListHabitsWidget({super.key, required this.habits});
+  const ListHabitsWidget({
+    super.key,
+    required this.habits,
+    required this.onDeleteCubit,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
         final habit = habits[index];
-        return HabitCard(habit: habit);
+        return HabitCard(habit: habit, onDeleteCubit: onDeleteCubit);
       },
       itemCount: habits.length,
     );

@@ -1,16 +1,23 @@
 import 'package:clean_arch/core/di/injector_container.dart';
 import 'package:clean_arch/features/habits/domain/entities/habit.dart';
-import 'package:clean_arch/features/habits/presentation/cubit/habit/habits_cubit.dart';
+import 'package:clean_arch/features/habits/presentation/cubit/delete_habit_cubit.dart';
+import 'package:clean_arch/features/habits/presentation/cubit/delete_habit_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HabitCard extends StatelessWidget {
-  const HabitCard({super.key, required this.habit});
+  final void Function() onDeleteCubit;
+  const HabitCard({
+    super.key,
+    required this.habit,
+    required this.onDeleteCubit,
+  });
 
   final Habit habit;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = sl<HabitsCubit>();
+    final cubit = DeleteHabitCubit(sl());
     return Card(
       child: ListTile(
         title: Text(habit.title),
@@ -20,7 +27,28 @@ class HabitCard extends StatelessWidget {
               onPressed: () {
                 cubit.deleteHabit(habit.id);
               },
-              icon: Icon(Icons.delete),
+              icon: BlocConsumer<DeleteHabitCubit, DeleteHabitState>(
+                listener: (context, state) {
+                  if (state is SuccessDeletingHabitState) {
+                    onDeleteCubit();
+                  }
+                },
+                bloc: cubit,
+                builder: (context, state) {
+                  if (state is DeletingHabitState &&
+                      state.deletingId == habit.id) {
+                    return CircularProgressIndicator();
+                  }
+                  if (state is ErrorDeletingHabitState) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Erro ao deletar hábito: ${state.error}'),
+                      ),
+                    );
+                  }
+                  return Icon(Icons.delete);
+                },
+              ),
             ),
           ],
         ),
