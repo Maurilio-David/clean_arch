@@ -11,7 +11,7 @@ class HabitLocalDatasourceImpl implements HabitLocalDatasource {
     final db = await _db;
 
     await db.delete(
-      habistTableName,
+      habitsTableName,
       where: "ïd = ?  AND TITLE = ?",
       whereArgs: [id],
     );
@@ -20,7 +20,7 @@ class HabitLocalDatasourceImpl implements HabitLocalDatasource {
   @override
   Future<List<HabitModel>> getHabits() async {
     final db = await _db;
-    final habitsModel = await db.query(habistTableName);
+    final habitsModel = await db.query(habitsTableName);
     return habitsModel.map(HabitModel.fromMap).toList();
   }
 
@@ -29,7 +29,7 @@ class HabitLocalDatasourceImpl implements HabitLocalDatasource {
     final db = await _db;
 
     await db.insert(
-      habistTableName,
+      habitsTableName,
       habit.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -40,7 +40,7 @@ class HabitLocalDatasourceImpl implements HabitLocalDatasource {
     final db = await _db;
 
     await db.update(
-      habistTableName,
+      habitsTableName,
       habit.toMap(),
       where: "ïd = ?",
       whereArgs: [habit.id],

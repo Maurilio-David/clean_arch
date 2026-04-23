@@ -14,17 +14,17 @@ class HabitModel {
 
   factory HabitModel.fromMap(Map<String, dynamic> map) {
     return HabitModel(
-      id: map[habistTableId],
-      title: map[habistTableName],
-      createdAt: DateTime.parse(map[habistTableCreatedAt]),
+      id: map[habitsTableId],
+      title: map[habitsTableTitle],
+      createdAt: DateTime.parse(map[habitsTableCreatedAt]),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      habistTableId: id,
-      habistTableTitle: title,
-      habistTableCreatedAt: createdAt.toIso8601String(),
+      habitsTableId: id,
+      habitsTableTitle: title,
+      habitsTableCreatedAt: createdAt.toIso8601String(),
     };
   }
 
