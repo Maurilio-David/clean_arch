@@ -10,11 +10,7 @@ class HabitLocalDatasourceImpl implements HabitLocalDatasource {
   Future<void> deleteHabit(String id) async {
     final db = await _db;
 
-    await db.delete(
-      habitsTableName,
-      where: "ïd = ?  AND TITLE = ?",
-      whereArgs: [id],
-    );
+    await db.delete(habitsTableName, where: "id = ?", whereArgs: [id]);
   }
 
   @override
